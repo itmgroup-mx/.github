@@ -1,0 +1,70 @@
+#!/bin/sh
+
+COMMIT_MSG_FILE="$1"
+COMMIT_SOURCE="$2"
+
+# Do not modify merge, squash or reused commit messages
+case "$COMMIT_SOURCE" in
+  merge|squash|commit)
+    exit 0
+    ;;
+esac
+
+BRANCH="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+
+# Extract branch type and issue number
+BRANCH_TYPE="$(printf "%s" "$BRANCH" | cut -d/ -f1)"
+ISSUE_NUMBER="$(printf "%s" "$BRANCH" | sed -E "s|^[^/]+/([0-9]+)([-/].*)?$|\1|")"
+
+if ! printf "%s" "$ISSUE_NUMBER" | grep -Eq "^[0-9]+$"; then
+  exit 0
+fi
+
+# Map branch type to Conventional Commit type
+case "$BRANCH_TYPE" in
+  feature)
+    COMMIT_TYPE="feat"
+    ;;
+  bugfix|fix|hotfix)
+    COMMIT_TYPE="fix"
+    ;;
+  chore|task|spike)
+    COMMIT_TYPE="chore"
+    ;;
+  docs)
+    COMMIT_TYPE="docs"
+    ;;
+  test)
+    COMMIT_TYPE="test"
+    ;;
+  refactor)
+    COMMIT_TYPE="refactor"
+    ;;
+  ci)
+    COMMIT_TYPE="ci"
+    ;;
+  *)
+    exit 0
+    ;;
+esac
+
+FIRST_LINE="$(head -n 1 "$COMMIT_MSG_FILE")"
+
+# Do not modify fixup or squash commits
+if printf "%s" "$FIRST_LINE" | grep -Eq "^(fixup!|squash!)"; then
+  exit 0
+fi
+
+# Do not duplicate an already formatted ITM commit message
+if printf "%s" "$FIRST_LINE" | grep -Eq "^#[0-9]+[[:space:]]+[a-z]+(\([^)]+\))?:[[:space:]]"; then
+  exit 0
+fi
+
+TMP_FILE="${COMMIT_MSG_FILE}.itm-tmp"
+
+{
+  printf "#%s %s: " "$ISSUE_NUMBER" "$COMMIT_TYPE"
+  cat "$COMMIT_MSG_FILE"
+} > "$TMP_FILE"
+
+mv "$TMP_FILE" "$COMMIT_MSG_FILE"
