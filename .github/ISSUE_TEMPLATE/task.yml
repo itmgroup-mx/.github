@@ -1,0 +1,33 @@
+name: Task
+description: Specific technical or operational work
+title: ""
+type: Task
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the work that needs to be completed.
+      placeholder: Explain clearly what needs to be done and why.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: Define the conditions that must be met for this task to be considered complete.
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add links, technical notes, dependencies, screenshots or other useful context.
+    validations:
+      required: false
