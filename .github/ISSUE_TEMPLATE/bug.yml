@@ -1,0 +1,57 @@
+name: Bug
+description: Unexpected behavior or problem
+type: Bug
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the problem clearly.
+      placeholder: Explain what is not working as expected.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Explain how the problem can be reproduced.
+      placeholder: |
+        1. Go to...
+        2. Perform...
+        3. Observe...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe what should happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Describe what actually happens.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Add environment, application version, browser, service or other relevant information.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add logs, screenshots, links or other useful information.
+    validations:
+      required: false

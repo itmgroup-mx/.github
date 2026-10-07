@@ -1,0 +1,41 @@
+name: Feature
+description: New functionality or product capability
+type: Feature
+
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or need
+      description: Describe the problem, opportunity or user need this feature addresses.
+      placeholder: Explain why this capability is needed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Expected outcome
+      description: Describe the functionality or outcome that should be delivered.
+      placeholder: Explain what should be possible when this feature is complete.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: Define the conditions that must be met for this feature to be considered complete.
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add mockups, links, dependencies, technical notes or other useful context.
+    validations:
+      required: false

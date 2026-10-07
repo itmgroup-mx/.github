@@ -1,0 +1,54 @@
+name: Epic
+description: Large body of work grouping related issues toward a common outcome
+type: Epic
+
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: Describe the business, product or technical outcome this Epic should achieve.
+      placeholder: What outcome are we trying to achieve and why?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Describe the main capabilities or areas included in this Epic.
+      placeholder: |
+        Included:
+        - ...
+
+        Not included:
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: success_criteria
+    attributes:
+      label: Success criteria
+      description: Define how we will know this Epic has achieved its objective.
+      placeholder: |
+        - [ ] Outcome 1
+        - [ ] Outcome 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: List relevant dependencies, systems, teams or external decisions.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add architecture references, business documents, designs or other useful information.
+    validations:
+      required: false
